@@ -1,15 +1,13 @@
-import axios from 'axios';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import StackNavigator from './src/navigation/StackNavigator';
 
 const App = () => {
-  useEffect(() => {
-    return () => {};
-  }, []);
   return (
-    <View>
-      <Text>Hello,World</Text>
-    </View>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   );
 };
 
