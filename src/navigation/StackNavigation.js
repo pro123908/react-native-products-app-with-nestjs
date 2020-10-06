@@ -11,7 +11,7 @@ const StackNavigator = createStackNavigator();
 const StackNavigation = () => {
   return (
     <StackNavigator.Navigator headerMode={false}>
-      {true ? (
+      {false ? (
         <>
           <StackNavigator.Screen
             name="Home"
@@ -27,7 +27,7 @@ const StackNavigation = () => {
             options={{
               animationTypeForReplace: true ? 'pop' : 'push',
             }}
-            component={SignUpScreen}></StackNavigator.Screen>
+            component={LoginScreen}></StackNavigator.Screen>
           <StackNavigator.Screen
             name="SignUp"
             component={SignUpScreen}></StackNavigator.Screen>

@@ -5,18 +5,25 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import TextCustom from './TextCustom';
 
 const ButtonWithIcon = ({
-  icon = 'user',
+  icon,
   placeholder,
   text,
   onPress,
   borderRadius,
+  marginBottom,
 }) => {
+  const buttonStyles = [
+    styles.container,
+    marginBottom && {marginBottom: marginBottom},
+  ];
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-      <TextCustom text={text} fontSize={20} color="#1363bc" />
-      <View style={styles.iconContainer}>
-        <AntIcon name={icon} style={styles.icon} color="#1363bc" />
-      </View>
+    <TouchableOpacity onPress={onPress} style={buttonStyles}>
+      <TextCustom text={text} fontSize={20} color="#1363bc" marginBottom={0} />
+      {icon && (
+        <View style={styles.iconContainer}>
+          <AntIcon name={icon} style={styles.icon} color="#1363bc" />
+        </View>
+      )}
     </TouchableOpacity>
   );
 };
@@ -31,7 +38,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 10,
     borderRadius: 100,
-    backgroundColor: 'blue',
   },
 
   iconContainer: {

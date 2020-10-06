@@ -4,8 +4,9 @@ import InputWithIcon from '../components/InputWithIcon';
 import {AntIcon} from 'react-native-vector-icons/AntDesign';
 import TextCustom from '../components/TextCustom';
 import ButtonWithIcon from '../components/ButtonWithIcon';
+import {ScrollView} from 'react-native-gesture-handler';
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
   return (
     <View style={styles.container}>
       <TextCustom
@@ -22,7 +23,15 @@ const LoginScreen = () => {
       />
       <InputWithIcon placeholder="Email Address" icon="user" />
       <InputWithIcon placeholder="Password" icon="key" />
-      <ButtonWithIcon text="Continue" />
+      <ButtonWithIcon text="Continue" marginBottom={20} />
+      <View>
+        <TextCustom
+          text="New User? Sign up"
+          fontWeight={'500'}
+          cursor
+          onClick={() => props.navigation.navigate('SignUp')}
+        />
+      </View>
     </View>
   );
 };

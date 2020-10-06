@@ -36,7 +36,9 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
 
-  input: {},
+  input: {
+    fontSize: 16,
+  },
 });
 
 export default InputWithIcon;

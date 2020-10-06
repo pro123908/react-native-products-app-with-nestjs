@@ -16,6 +16,9 @@ const RoundButtonWithIcon = ({
   color,
   border,
   disabled,
+  size,
+  marginBottom,
+  marginRight,
 }) => {
   const buttonStyles = [
     styles.container,
@@ -23,6 +26,10 @@ const RoundButtonWithIcon = ({
     position && {position: position, bottom: 0, right: 10},
     backgroundColor && {backgroundColor: backgroundColor},
     border && {borderWidth: 3, borderColor: '#2c629e'},
+    disabled && {backgroundColor: '#d3d3d3'},
+    size && {width: size, height: size},
+    marginBottom && {marginBottom: marginBottom},
+    marginRight && {marginRight: marginRight},
   ];
   return (
     <TouchableOpacity
@@ -34,7 +41,7 @@ const RoundButtonWithIcon = ({
           name={icon}
           style={styles.icon}
           color={color ? color : '#1363bc'}
-          size={40}
+          size={size ? size / 2 : 40}
         />
       </View>
     </TouchableOpacity>
@@ -55,7 +62,6 @@ const styles = StyleSheet.create({
     height: 80,
 
     borderRadius: 100,
-    marginBottom: 20,
   },
 
   iconContainer: {

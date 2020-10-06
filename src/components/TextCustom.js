@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text} from 'react-native';
 
 const TextCustom = ({
@@ -10,7 +10,10 @@ const TextCustom = ({
   marginBottom,
   fontWeight,
   textAlign,
+  onClick,
 }) => {
+  const [isFocus, isSetFocus] = useState(false);
+
   if (fontWeight) {
     if (fontWeight === '200') {
       fontWeight = 'PoppinsExtraLight';
@@ -37,16 +40,19 @@ const TextCustom = ({
     fontWeight && {fontFamily: fontWeight},
     textAlign && {textAlign: textAlign},
   ];
-  return <Text style={stylesText}>{text}</Text>;
+  return (
+    <Text style={stylesText} onPress={onClick}>
+      {text}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({
   text: {
     color: '#fff',
 
-    marginBottom: 10,
-
     fontFamily: 'PoppinsRegular',
+    flexShrink: 1,
   },
 });
 
