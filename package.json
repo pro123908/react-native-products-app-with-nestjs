@@ -24,7 +24,9 @@
     "react-native-screens": "^2.11.0",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "formik": "^2.1.7",
+    "react-native-vector-icons": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",

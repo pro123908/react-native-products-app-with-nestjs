@@ -1,69 +1,80 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Button, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import InputWithIcon from '../components/InputWithIcon';
+import {AntIcon} from 'react-native-vector-icons/AntDesign';
+import TextCustom from '../components/TextCustom';
+import ButtonWithIcon from '../components/ButtonWithIcon';
+import Product from '../components/Product';
+import {ScrollView} from 'react-native-gesture-handler';
 
-const HomeScreen = ({navigation, route}) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Button
-          title="Update Count"
-          onPress={() => setCount((count) => count + 1)}
+const HomeScreen = () => {
+  const productsArr = [];
+  const getHeader = () => {
+    return (
+      <View style={styles.container}>
+        <TextCustom
+          text="Products"
+          color="#000"
+          fontSize={30}
+          marginBottom={20}
         />
-      ),
-    });
-  }, [navigation]);
+        <TextCustom
+          text="Add products to your list"
+          color="#000"
+          fontSize={20}
+          marginBottom={20}
+        />
+      </View>
+    );
+  };
+
+  const getFooter = () => {
+    if (false) {
+      return null;
+    }
+    return (
+      <View
+        style={{
+          backgroundColor: '#1363bc',
+          padding: 10,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginRight: 10,
+          marginLeft: 10,
+          borderRadius: 10,
+        }}>
+        <TextCustom text="Loading..." fontSize={20} />
+      </View>
+    );
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Home ScreenX</Text>
-      <Text>{route.params.itemId}</Text>
-      <Text>{route.params.desc}</Text>
-      <Text>Count : {count}</Text>
-      <TouchableOpacity
-        style={styles.navBtn}
-        onPress={
-          () =>
-            navigation.navigate('About', {
-              itemId: 255,
-              desc: 'Item 255',
-              title: 'About through Home',
-            })
-          // navigation.push("About")
-          // navigation.popToTop();
-          // navigation.goBack()
-          //navigation.navigate("Home")
-        }>
-        <Text style={{color: '#fff', fontSize: 20}}>About Screen</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.navBtn}
-        onPress={
-          () => navigation.navigate('Modal')
-          // navigation.push("About")
-          // navigation.popToTop();
-          // navigation.goBack()
-          //navigation.navigate("Home")
-        }>
-        <Text style={{color: '#fff', fontSize: 20}}>Open Modal</Text>
-      </TouchableOpacity>
-    </View>
+    <FlatList
+      data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={() => <Product />}
+      ListHeaderComponent={getHeader}
+      ListFooterComponent={getFooter}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // backgroundColor: '#1363bc',
     backgroundColor: '#fff',
+    padding: 30,
+    alignItems: 'center',
+    paddingBottom: 0,
   },
-  navBtn: {
-    marginVertical: 10,
-    backgroundColor: 'rgb(0,0,0)',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-});
 
+  screenTitle: {
+    fontSize: 30,
+  },
+
+  icon: {},
+
+  input: {},
+});
 export default HomeScreen;
