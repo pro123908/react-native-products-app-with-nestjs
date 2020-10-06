@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {handleInAndOutFromLocalStorage} from '../utils/LocalStorage';
-import showToast from '../utils/toast';
 
 import {
   ADD_PRODUCT,
@@ -32,13 +31,15 @@ export const getProduct = (productId) => {
 export const getProducts = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get('http://192.168.18.226:3000/products');
-
-      console.log(response.data);
+      dispatch(setLoading(true));
+      const response = await axios.get('http://192.168.0.200:3000/products');
+      console.log('Inside');
+      console.log('Data came?', response.data);
 
       dispatch({type: GET_PRODUCTS, payload: response.data});
       handleInAndOutFromLocalStorage('products', response.data);
     } catch (error) {
+      console.log('error =>', error);
       if (error.response?.data) {
         dispatch({type: REQUEST_ERROR, payload: error.response.data});
       } else {
@@ -54,7 +55,7 @@ export const addProduct = (title, description, price) => {
     setTimeout(async () => {
       try {
         const response = await axios.post(
-          'http://192.168.18.226:3000/products',
+          'http://192.168.0.200:3000/products',
           {
             title,
             description,
@@ -65,7 +66,6 @@ export const addProduct = (title, description, price) => {
         console.log(response.data);
 
         dispatch({type: ADD_PRODUCT, payload: response.data});
-        showToast('Product Added', 'success', 2000);
       } catch (error) {
         console.log(error.response.data);
         // dispatch({ type: REQUEST_ERROR, payload: error.response.data });
@@ -86,7 +86,6 @@ export const deleteProduct = (productId) => {
         console.log(response.data);
 
         dispatch({type: DELETE_PRODUCT, payload: productId});
-        showToast('Product Deleted', 'success', 2000);
       } catch (error) {
         console.log(error.response.data);
         // dispatch({ type: REQUEST_ERROR, payload: error.response.data });
@@ -106,7 +105,6 @@ export const updateProduct = (productId, fieldsToBeUpdated) => {
       console.log(response.data._id);
 
       dispatch({type: UPDATE_PRODUCT, payload: response.data});
-      showToast('Product Updated', 'success', 2000);
     } catch (error) {
       console.log(error.response.data);
       // dispatch({ type: REQUEST_ERROR, payload: error.response.data });

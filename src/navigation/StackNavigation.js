@@ -1,6 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {Text, View} from 'react-native';
+import AddProduct from '../screens/AddProduct';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
@@ -15,6 +16,9 @@ const StackNavigation = () => {
           <StackNavigator.Screen
             name="Home"
             component={HomeScreen}></StackNavigator.Screen>
+          <StackNavigator.Screen
+            name="Add"
+            component={AddProduct}></StackNavigator.Screen>
         </>
       ) : (
         <>

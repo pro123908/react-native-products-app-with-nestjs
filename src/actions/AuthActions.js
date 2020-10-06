@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {
-  clearLocalStorage,
-  handleUserInLocalStorage,
-} from '../utils/LocalStorage';
+// import {
+//   clearLocalStorage,
+//   handleUserInLocalStorage,
+// } from '../utils/LocalStorage';
 import {
   CLEAR_REGISTRATION_ERROR,
   LOGIN_USER,
@@ -27,7 +27,7 @@ export const loginUser = (email, password, history) => {
       //   "ACCESS_TOKEN",
       //   response.data.accessToken
       // );
-      handleUserInLocalStorage('xord-user', response.data);
+      // handleUserInLocalStorage('xord-user', response.data);
       dispatch({type: LOGIN_USER, payload: response.data});
       history.push('/home');
     } catch (error) {
@@ -88,7 +88,7 @@ export const clearRegistrationError = () => {
 export const logoutUser = (history) => {
   return (dispatch) => {
     dispatch({type: LOGOUT_USER});
-    clearLocalStorage('xord-user');
+    // clearLocalStorage('xord-user');
     history.push('/login');
   };
 };

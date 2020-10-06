@@ -5,7 +5,7 @@ import {
   GET_PRODUCTS,
   SET_LOADING,
   UPDATE_PRODUCT,
-} from "../actions/actionType";
+} from '../actions/actionType';
 
 const initialState = {
   product: {},
@@ -27,7 +27,7 @@ export const ProductsReducer = (state = initialState, action) => {
       return {
         ...state,
         products: state.products.filter(
-          (product) => product.id !== action.payload
+          (product) => product.id !== action.payload,
         ),
         loading: false,
       };
@@ -50,6 +50,7 @@ export const ProductsReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
+        loading: false,
       };
 
     case SET_LOADING:

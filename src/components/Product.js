@@ -2,12 +2,12 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import TextCustom from './TextCustom';
 
-const Product = () => {
+const Product = ({title, description}) => {
   return (
     <View style={styles.container}>
-      <TextCustom text="Product Title" fontSize={20} marginBottom={10} />
+      <TextCustom text={title} fontSize={20} marginBottom={10} />
       <TextCustom
-        text="Product Description can be very long sometimes"
+        text={description ? description : 'No Description'}
         fontSize={16}
       />
     </View>

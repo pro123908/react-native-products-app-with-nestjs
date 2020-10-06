@@ -6,15 +6,22 @@ const TextInputCustom = ({placeholder, value, onChangeHandler}) => {
     <TextInput
       style={styles.textInput}
       placeholder={placeholder}
+      value={value}
       onChangeText={onChangeHandler}
-      placeholderTextColor="#fff"
+      // placeholderTextColor="#83b3e7"
     />
   );
 };
 
 const styles = StyleSheet.create({
   textInput: {
-    color: '#fff',
+    color: '#000',
+    borderBottomWidth: 2,
+    borderBottomColor: '#1363bc',
+    fontFamily: 'PoppinsRegular',
+
+    fontSize: 20,
+    marginBottom: 40,
   },
 });
 
