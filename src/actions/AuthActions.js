@@ -9,13 +9,15 @@ import {
   REQUEST_ERROR,
   SIGN_UP_USER,
   LOGOUT_USER,
+  SET_AUTH_LOADING,
 } from './actionType';
 
-export const loginUser = (email, password, history) => {
+export const loginUser = (email, password, navigation) => {
   return async (dispatch) => {
+    setLoading(true);
     try {
       const response = await axios.post(
-        'http://192.168.18.226:3000/users/login',
+        'http://192.168.43.43:3000/users/login',
         {
           email,
           password,
@@ -29,9 +31,9 @@ export const loginUser = (email, password, history) => {
       // );
       // handleUserInLocalStorage('xord-user', response.data);
       dispatch({type: LOGIN_USER, payload: response.data});
-      history.push('/home');
+      // navigation.navigate('Home');
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
       dispatch({type: REQUEST_ERROR, payload: error.response.data});
     }
   };
@@ -92,3 +94,8 @@ export const logoutUser = (history) => {
     history.push('/login');
   };
 };
+
+export const setLoading = (loading) => ({
+  type: SET_AUTH_LOADING,
+  payload: loading,
+});

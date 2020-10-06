@@ -32,7 +32,7 @@ export const getProducts = () => {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
-      const response = await axios.get('http://192.168.0.200:3000/products');
+      const response = await axios.get('http://192.168.43.43:3000/products');
       console.log('Inside');
       console.log('Data came?', response.data);
 
@@ -55,7 +55,7 @@ export const addProduct = (title, description, price) => {
     setTimeout(async () => {
       try {
         const response = await axios.post(
-          'http://192.168.0.200:3000/products',
+          'http://192.168.43.43:3000/products',
           {
             title,
             description,

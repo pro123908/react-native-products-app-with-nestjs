@@ -8,11 +8,11 @@ import RoundButtonWithIcon from '../components/RoundButtonWithIcon';
 import {OpenImagePicker} from '../components/ImagePicker';
 import {ScrollView} from 'react-native-gesture-handler';
 
-const SignUpScreen = () => {
+const SignUpScreen = (props) => {
   const [image, setImage] = useState(null);
 
   return (
-    <View>
+    <View style={styles.aboveView}>
       <ScrollView>
         <View style={styles.container}>
           <TextCustom
@@ -42,7 +42,13 @@ const SignUpScreen = () => {
             <TextCustom text="Upload your profile picture" fontSize={18} />
           </View>
           {image && <Image source={image} style={styles.image} />}
-          <ButtonWithIcon text="Continue" />
+          <ButtonWithIcon text="Continue" marginBottom={20} />
+          <TextCustom
+            text="Already a user? Sign in"
+            fontWeight={'500'}
+            cursor
+            onClick={() => props.navigation.navigate('Login')}
+          />
         </View>
       </ScrollView>
     </View>
@@ -50,11 +56,15 @@ const SignUpScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  aboveView: {
     flex: 1,
     backgroundColor: '#1363bc',
+  },
+
+  container: {
     padding: 30,
     alignItems: 'center',
+    height: '100%',
   },
 
   screenTitle: {

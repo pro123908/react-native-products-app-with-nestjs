@@ -19,8 +19,12 @@ import {connect} from 'react-redux';
 
 const HomeScreen = (props) => {
   useEffect(() => {
-    props.getProducts();
-  }, []);
+    if (!props.accessToken) {
+      props.navigation.navigate('Login');
+    } else {
+      props.getProducts();
+    }
+  }, [props.accessToken]);
 
   useEffect(() => {
     console.log(props.products);
@@ -142,6 +146,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   products: state.products.products,
   loading: state.products.loading,
+  accessToken: state.auth.accessToken,
 });
 
 const mapDispatchToProps = {

@@ -11,6 +11,7 @@ const ButtonWithIcon = ({
   onPress,
   borderRadius,
   marginBottom,
+  type,
 }) => {
   const buttonStyles = [
     styles.container,

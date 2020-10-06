@@ -31,11 +31,13 @@ const readData = async () => {
   }
 };
 
-readData().then((products) => {
-  store.dispatch({
-    type: GET_PRODUCTS,
-    payload: products ? JSON.parse(products) : [],
-  });
-});
+store.getState().auth.accessToken
+  ? readData().then((products) => {
+      store.dispatch({
+        type: GET_PRODUCTS,
+        payload: products ? JSON.parse(products) : [],
+      });
+    })
+  : '';
 
 export default store;
