@@ -11,7 +11,7 @@ import {
 
 const initialState = {
   accessToken: '',
-  error: {},
+  error: null,
   user: {},
   email: '',
   name: '',
@@ -19,6 +19,7 @@ const initialState = {
 };
 
 const AuthReducer = (state = initialState, action) => {
+  console.log('Here', action);
   switch (action.type) {
     case LOGIN_USER:
       return {

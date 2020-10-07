@@ -11,6 +11,7 @@ export const OpenImagePicker = (setImage) => {
   };
   ImagePicker.showImagePicker(options, (response) => {
     console.log('Response = ', response);
+    let source = '';
 
     if (response.didCancel) {
       console.log('User cancelled image picker');
@@ -19,7 +20,7 @@ export const OpenImagePicker = (setImage) => {
     } else if (response.customButton) {
       console.log('User tapped custom button: ', response.customButton);
     } else {
-      const source = {uri: response.uri};
+      source = {uri: response.uri};
       setImage(source);
     }
   });

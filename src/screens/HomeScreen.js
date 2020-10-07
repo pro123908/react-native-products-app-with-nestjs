@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {
   ActivityIndicator,
   FlatList,
+  Image,
   StyleSheet,
   Text,
   View,
@@ -16,6 +17,7 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
 import {addProduct, getProducts} from '../actions/ProductsActions';
 import {connect} from 'react-redux';
+import {logoutUser} from '../actions/AuthActions';
 
 const HomeScreen = (props) => {
   useEffect(() => {
@@ -45,6 +47,13 @@ const HomeScreen = (props) => {
           textAlign="center"
           marginBottom={10}
           fontWeight="500"
+        />
+        <Image
+          style={{flex: 1}}
+          source={{
+            uri:
+              'content://com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F20/ORIGINAL/NONE/image%2Fjpeg/156725367',
+          }}
         />
 
         {/* <TextCustom
@@ -100,12 +109,23 @@ const HomeScreen = (props) => {
             text="Add"
             icon="plus"
             position="absolute"
+            size={70}
             border
+            bottom={90}
+            right={1}
             onPress={() =>
               props.navigation.navigate('Add', {
                 onAddProduct: addProductInApi,
               })
             }
+          />
+          <RoundButtonWithIcon
+            text="Logout"
+            icon="logout"
+            position="absolute"
+            size={70}
+            border
+            onPress={() => props.logoutUser()}
           />
         </>
       )}
@@ -152,6 +172,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   getProducts,
   addProduct,
+  logoutUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

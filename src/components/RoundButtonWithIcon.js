@@ -19,11 +19,22 @@ const RoundButtonWithIcon = ({
   size,
   marginBottom,
   marginRight,
+  bottom,
+  right,
+  top,
+  left,
 }) => {
   const buttonStyles = [
     styles.container,
     center && {alignSelf: 'center'},
-    position && {position: position, bottom: 0, right: 10},
+    position && {
+      position: position,
+      bottom: bottom ? bottom : 10,
+      right: right ? right : 10,
+      top: top && top,
+      left: left && left,
+    },
+
     backgroundColor && {backgroundColor: backgroundColor},
     border && {borderWidth: 3, borderColor: '#2c629e'},
     disabled && {backgroundColor: '#d3d3d3'},
@@ -54,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
 
     elevation: 5,
 

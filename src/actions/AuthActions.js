@@ -1,8 +1,8 @@
 import axios from 'axios';
-// import {
-//   clearLocalStorage,
-//   handleUserInLocalStorage,
-// } from '../utils/LocalStorage';
+import {
+  clearLocalStorage,
+  handleInAndOutFromLocalStorage,
+} from '../utils/LocalStorage';
 import {
   CLEAR_REGISTRATION_ERROR,
   LOGIN_USER,
@@ -29,7 +29,7 @@ export const loginUser = (email, password, navigation) => {
       //   "ACCESS_TOKEN",
       //   response.data.accessToken
       // );
-      // handleUserInLocalStorage('xord-user', response.data);
+      handleInAndOutFromLocalStorage('xord-user', response.data);
       dispatch({type: LOGIN_USER, payload: response.data});
       // navigation.navigate('Home');
     } catch (error) {
@@ -39,23 +39,23 @@ export const loginUser = (email, password, navigation) => {
   };
 };
 
-export const registerUser = (name, email, password, history) => {
+export const registerUser = (name, email, password, image, navigation) => {
+  console.log(image);
   return async (dispatch) => {
     try {
-      const response = await axios.post('http://192.168.18.226:3000/users', {
+      const response = await axios.post('http://192.168.43.43:3000/users', {
         name,
         email,
         password,
+        image,
       });
-
       console.log(response.data);
       // handleAccessTokenInLocalStorage(
       //   "ACCESS_TOKEN",
       //   response.data.accessToken
       // );
       dispatch({type: SIGN_UP_USER, payload: response.data});
-
-      history.push('/login');
+      navigation.navigate('Login');
     } catch (error) {
       console.log(error.response.data);
       dispatch({type: REQUEST_ERROR, payload: error.response.data});
@@ -87,11 +87,11 @@ export const clearRegistrationError = () => {
   };
 };
 
-export const logoutUser = (history) => {
+export const logoutUser = (navigation) => {
   return (dispatch) => {
     dispatch({type: LOGOUT_USER});
-    // clearLocalStorage('xord-user');
-    history.push('/login');
+
+    clearLocalStorage('xord-user');
   };
 };
 

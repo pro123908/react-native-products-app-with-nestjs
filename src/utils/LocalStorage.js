@@ -25,7 +25,7 @@ export const handleUserInLocalStorage = (key, data) => {
 };
 
 export const clearLocalStorage = (key) => {
-  if (key) localStorage.removeItem(key);
+  if (key) AsyncStorage.removeItem(key);
 };
 
 export const handleInAndOutFromLocalStorage = async (key, data) => {

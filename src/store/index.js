@@ -11,33 +11,4 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 //   payload: handleAccessTokenInLocalStorage("ACCESS_TOKEN"),
 // });
 
-// let currentUser = handleUserInLocalStorage("xord-user");
-// if (currentUser) {
-//   store.dispatch({
-//     type: LOGIN_USER,
-//     payload: handleUserInLocalStorage("xord-user"),
-//   });
-// }
-
-const readData = async () => {
-  try {
-    const products = await AsyncStorage.getItem('products');
-
-    if (products !== null) {
-      return products;
-    }
-  } catch (e) {
-    alert('Failed to fetch the data from storage');
-  }
-};
-
-store.getState().auth.accessToken
-  ? readData().then((products) => {
-      store.dispatch({
-        type: GET_PRODUCTS,
-        payload: products ? JSON.parse(products) : [],
-      });
-    })
-  : '';
-
 export default store;

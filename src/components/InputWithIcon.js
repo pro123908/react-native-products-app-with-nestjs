@@ -12,9 +12,15 @@ const InputWithIcon = ({
   onBlur,
   value,
   error,
+  marginBottom,
+  password,
 }) => {
+  const inputStyles = [
+    styles.mainContainer,
+    marginBottom && {marginBottom: marginBottom},
+  ];
   return (
-    <View style={styles.mainContainer}>
+    <View style={inputStyles}>
       <View style={styles.container}>
         {/* <TextCustom text="Icon" fontSize={20} /> */}
         <AntIcon name={icon} style={styles.icon} />
@@ -25,21 +31,24 @@ const InputWithIcon = ({
           onChangeText={onChangeText}
           onBlur={onBlur}
           value={value}
+          secureTextEntry={password}
         />
       </View>
-      <TextCustom
-        text={error ? error : ''}
-        color="yellow"
-        fontSize={14}
-        fontWeight="500"
-      />
+      {error && (
+        <TextCustom
+          text={error}
+          color="yellow"
+          fontSize={14}
+          fontWeight="500"
+        />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   mainContainer: {
-    marginBottom: 30,
+    marginBottom: 10,
   },
   container: {
     width: '100%',
