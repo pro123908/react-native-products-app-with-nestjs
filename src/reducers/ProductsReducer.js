@@ -36,8 +36,9 @@ export const ProductsReducer = (state = initialState, action) => {
       return {
         ...state,
         products: state.products.map((product) => {
-          return product.id === action.payload._id ? action.payload : product;
+          return product.id === action.payload.id ? action.payload : product;
         }),
+        loading: false,
       };
 
     case GET_PRODUCT:

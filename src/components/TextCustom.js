@@ -11,6 +11,8 @@ const TextCustom = ({
   fontWeight,
   textAlign,
   onClick,
+  flex,
+  marginRight,
 }) => {
   const [isFocus, isSetFocus] = useState(false);
 
@@ -39,6 +41,8 @@ const TextCustom = ({
     backgroundColor && {backgroundColor: backgroundColor},
     fontWeight && {fontFamily: fontWeight},
     textAlign && {textAlign: textAlign},
+    flex && {flex: flex},
+    marginRight && {marginRight: marginRight},
   ];
   return (
     <Text style={stylesText} onPress={onClick}>

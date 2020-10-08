@@ -15,7 +15,12 @@ import RoundButtonWithIcon from '../components/RoundButtonWithIcon';
 import Product from '../components/Product';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
-import {addProduct, getProducts} from '../actions/ProductsActions';
+import {
+  addProduct,
+  deleteProduct,
+  getProducts,
+  updateProduct,
+} from '../actions/ProductsActions';
 import {connect} from 'react-redux';
 import {logoutUser} from '../actions/AuthActions';
 
@@ -42,14 +47,14 @@ const HomeScreen = (props) => {
       <View style={styles.container}>
         <TextCustom
           text={`Welcome ${props.name}`}
-          color="#000"
+          // color="#000"
           fontSize={30}
           textAlign="center"
           marginBottom={-10}
         />
         <TextCustom
           text="Your Products"
-          color="#000"
+          // color="#000"
           fontSize={25}
           textAlign="center"
           marginBottom={20}
@@ -72,9 +77,21 @@ const HomeScreen = (props) => {
           alignItems: 'center',
           marginRight: 10,
           marginLeft: 10,
+          marginTop: 100,
         }}>
         <TextCustom text="--- Ended ---" color="#000" fontSize={20} />
       </View>
+    );
+  };
+
+  const getListEmptyComponent = () => {
+    return (
+      <TextCustom
+        text="No Products Found"
+        // color="#000"
+        fontSize={20}
+        textAlign="center"
+      />
     );
   };
 
@@ -85,17 +102,19 @@ const HomeScreen = (props) => {
       ) : (
         <>
           <FlatList
-            data={props.products.reverse()}
+            data={props.products}
+            ListEmptyComponent={getListEmptyComponent()}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({item: {title, description, userImage}}) => (
+            renderItem={({item}) => (
               <Product
-                userImage={userImage}
-                title={title}
-                description={description}
+                navigation={props.navigation}
+                product={item}
+                deleteProduct={props.deleteProduct}
+                updateProduct={props.updateProduct}
               />
             )}
             ListHeaderComponent={getHeader}
-            ListFooterComponent={getFooter}
+            ListFooterComponent={props.products.length > 0 && getFooter()}
           />
           <RoundButtonWithIcon
             text="Add"
@@ -128,11 +147,12 @@ const HomeScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#1363bc',
-    backgroundColor: '#fff',
+    backgroundColor: '#1363bc',
+
     padding: 30,
     alignItems: 'center',
     paddingBottom: 0,
+    marginBottom: 30,
   },
 
   screenTitle: {
@@ -168,6 +188,8 @@ const mapDispatchToProps = {
   getProducts,
   addProduct,
   logoutUser,
+  deleteProduct,
+  updateProduct,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

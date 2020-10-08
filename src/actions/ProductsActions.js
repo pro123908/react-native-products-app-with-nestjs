@@ -72,6 +72,7 @@ export const addProduct = (email, title, description, price) => {
 };
 
 export const deleteProduct = (productId) => {
+  console.log('came with id => ', productId);
   return async (dispatch) => {
     dispatch(setLoading(true));
     setTimeout(async () => {
@@ -79,9 +80,7 @@ export const deleteProduct = (productId) => {
         const response = await axios.delete(
           `${ipAddress}/products/${productId}`,
         );
-
         console.log(response.data);
-
         dispatch({type: DELETE_PRODUCT, payload: productId});
       } catch (error) {
         console.log(error.response.data);
@@ -92,15 +91,15 @@ export const deleteProduct = (productId) => {
 };
 
 export const updateProduct = (productId, fieldsToBeUpdated) => {
+  console.log(productId, fieldsToBeUpdated);
   return async (dispatch) => {
+    dispatch(setLoading(true));
     try {
       const response = await axios.patch(
         `${ipAddress}/products/${productId}`,
         fieldsToBeUpdated,
       );
-
-      console.log(response.data._id);
-
+      console.log('Product Update => ', response.data);
       dispatch({type: UPDATE_PRODUCT, payload: response.data});
     } catch (error) {
       console.log(error.response.data);

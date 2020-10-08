@@ -8,10 +8,17 @@ import TextInputCustom from '../components/TextInputCustom';
 // More info on all the options is below in the API Reference... just some common use cases shown here
 
 const AddProduct = (props) => {
-  const {onAddProduct} = props.route.params;
+  const {onAddProduct, values} = props.route.params;
+  let prevTitle = values?.title;
+  let prevDescription = values?.description;
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  console.log('AD pro => ', {prevTitle, prevDescription});
+
+  const [title, setTitle] = useState(prevTitle ? prevTitle : '');
+  const [description, setDescription] = useState(
+    prevDescription ? prevDescription : '',
+  );
+
   const [borderColor, setBorderColor] = useState('#000');
 
   return (

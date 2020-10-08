@@ -1,9 +1,21 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import TextCustom from './TextCustom';
+import Entypo from 'react-native-vector-icons/Entypo';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const Product = ({title, description, userImage}) => {
-  console.log('Single Product => ', {title, description, userImage});
+const Product = ({
+  product: {id, title, description, userImage},
+  deleteProduct,
+  updateProduct,
+  navigation,
+}) => {
+  const updateProductWithFields = (title, description) => {
+    updateProduct(id, {title, description});
+    navigation.navigate('Home');
+  };
+  console.log('Single Product => ', {id, title, description, userImage});
   return (
     <View style={styles.mainContainer}>
       <Image
@@ -13,10 +25,38 @@ const Product = ({title, description, userImage}) => {
         }}
       />
       <View style={styles.container}>
-        <TextCustom text={title} fontSize={20} marginBottom={10} />
+        <View style={styles.productTop}>
+          <TextCustom
+            text={title}
+            fontSize={25}
+            marginBottom={10}
+            marginRight={10}
+            flex={5}
+          />
+          <View style={styles.icons}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('Add', {
+                  onAddProduct: updateProductWithFields,
+                  values: {title, description},
+                })
+              }>
+              <AntDesign
+                color="#fff"
+                name="edit"
+                size={25}
+                style={{marginTop: 2, marginRight: 10}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => deleteProduct(id)}>
+              <Entypo color="#fff" name="cross" size={30} />
+            </TouchableOpacity>
+          </View>
+        </View>
         <TextCustom
           text={description ? description : 'No Description'}
           fontSize={16}
+          marginBottom={10}
         />
       </View>
     </View>
@@ -47,6 +87,18 @@ const styles = StyleSheet.create({
 
   image: {
     flex: 1,
+  },
+
+  productTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  icons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginRight: 10,
+    flex: 2,
   },
 });
 
