@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     height: 80,
 
     borderRadius: 100,
+    zIndex: 100,
   },
 
   iconContainer: {

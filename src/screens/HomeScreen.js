@@ -53,7 +53,7 @@ const HomeScreen = (props) => {
           marginBottom={-10}
         />
         <TextCustom
-          text="Your Products"
+          text="Your NewsFeed"
           // color="#000"
           fontSize={25}
           textAlign="center"
@@ -109,6 +109,7 @@ const HomeScreen = (props) => {
               <Product
                 navigation={props.navigation}
                 product={item}
+                currentUser={props.email}
                 deleteProduct={props.deleteProduct}
                 updateProduct={props.updateProduct}
               />
@@ -149,7 +150,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#1363bc',
 
-    padding: 30,
+    paddingHorizontal: 10,
+    paddingVertical: 30,
     alignItems: 'center',
     paddingBottom: 0,
     marginBottom: 30,
