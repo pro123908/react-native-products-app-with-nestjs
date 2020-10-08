@@ -33,7 +33,7 @@ const HomeScreen = (props) => {
   }, [props.products]);
 
   const addProductInApi = (title, desc) => {
-    props.addProduct(title, desc);
+    props.addProduct(props.email, title, desc);
     props.navigation.navigate('Home');
   };
   const productsArr = [];
@@ -41,27 +41,20 @@ const HomeScreen = (props) => {
     return (
       <View style={styles.container}>
         <TextCustom
+          text={`Welcome ${props.name}`}
+          color="#000"
+          fontSize={30}
+          textAlign="center"
+          marginBottom={-10}
+        />
+        <TextCustom
           text="Your Products"
           color="#000"
           fontSize={25}
           textAlign="center"
-          marginBottom={10}
+          marginBottom={20}
           fontWeight="500"
         />
-        <Image
-          style={{flex: 1}}
-          source={{
-            uri:
-              'content://com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F20/ORIGINAL/NONE/image%2Fjpeg/156725367',
-          }}
-        />
-
-        {/* <TextCustom
-          text="Products"
-          color="#000"
-          fontSize={30}
-          marginBottom={20}
-        /> */}
       </View>
     );
   };
@@ -82,11 +75,6 @@ const HomeScreen = (props) => {
         }}>
         <TextCustom text="--- Ended ---" color="#000" fontSize={20} />
       </View>
-      // <ActivityIndicator
-      //   size="large"
-      //   color="#1363bc"
-      //   animating={props.loading}
-      // />
     );
   };
 
@@ -99,8 +87,12 @@ const HomeScreen = (props) => {
           <FlatList
             data={props.products.reverse()}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({item: {title, description}}) => (
-              <Product title={title} description={description} />
+            renderItem={({item: {title, description, userImage}}) => (
+              <Product
+                userImage={userImage}
+                title={title}
+                description={description}
+              />
             )}
             ListHeaderComponent={getHeader}
             ListFooterComponent={getFooter}
@@ -167,6 +159,9 @@ const mapStateToProps = (state) => ({
   products: state.products.products,
   loading: state.products.loading,
   accessToken: state.auth.accessToken,
+  email: state.auth.email,
+  image: state.auth.image,
+  name: state.auth.name,
 });
 
 const mapDispatchToProps = {

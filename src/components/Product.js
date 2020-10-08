@@ -2,14 +2,14 @@ import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import TextCustom from './TextCustom';
 
-const Product = ({title, description}) => {
+const Product = ({title, description, userImage}) => {
+  console.log('Single Product => ', {title, description, userImage});
   return (
     <View style={styles.mainContainer}>
       <Image
         style={{height: 100, width: 100, marginRight: 20}}
         source={{
-          uri:
-            'content://com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F20/ORIGINAL/NONE/image%2Fjpeg/156725367',
+          uri: userImage,
         }}
       />
       <View style={styles.container}>

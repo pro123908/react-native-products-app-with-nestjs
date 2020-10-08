@@ -59,6 +59,13 @@ const AddProduct = (props) => {
           disabled={!(title && description)}
           onPress={() => onAddProduct(title, description)}
         />
+        {/* <Image
+          style={{flex: 1, height: 100, width: 100, marginRight: 20}}
+          source={{
+            uri:
+              'content://com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F20/ORIGINAL/NONE/image%2Fjpeg/156725367',
+          }}
+        /> */}
       </View>
     </>
   );

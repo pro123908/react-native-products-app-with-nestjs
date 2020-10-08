@@ -20,9 +20,9 @@ const StackNavigation = () => {
         component={AddProduct}></StackNavigator.Screen>
       <StackNavigator.Screen
         name="Login"
-        options={{
-          animationTypeForReplace: true ? 'pop' : 'push',
-        }}
+        // options={{
+        //   animationTypeForReplace: true ? 'pop' : 'push',
+        // }}
         component={LoginScreen}></StackNavigator.Screen>
       <StackNavigator.Screen
         name="SignUp"

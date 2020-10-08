@@ -11,6 +11,7 @@ import {clearRegistrationError, loginUser} from '../actions/AuthActions';
 
 const LoginScreen = (props) => {
   useEffect(() => {
+    console.log('Access token in loginScreen => ', props.accessToken);
     if (props.accessToken) {
       props.navigation.navigate('Home');
     }
@@ -25,105 +26,118 @@ const LoginScreen = (props) => {
   }, [props.navigation]);
 
   return (
-    <View style={styles.aboveView}>
-      <ScrollView>
-        <View style={styles.container}>
-          <TextCustom
-            fontSize={40}
-            textTransform="uppercase"
-            text="Login"
-            marginBottom={20}
-          />
-          <TextCustom
-            fontSize={16}
-            textTransform="uppercase"
-            text="Hey, let's get started"
-            marginBottom={30}
-          />
-          {props.error?.message && (
-            <TextCustom
-              fontSize={16}
-              textTransform="uppercase"
-              text={props.error.message}
-              marginBottom={5}
-              color="yellow"
-            />
-          )}
-          <Formik
-            initialValues={{email: 'pro123908@gmail.com', password: 'home123'}}
-            validate={(values) => {
-              const errors = {};
-
-              if (!values.email) {
-                errors.email = 'Email is Required';
-              } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-              ) {
-                errors.email = 'Invalid email address';
-              }
-
-              if (!values.password) errors.password = 'Password is Required';
-              else if (values.password.length < 6)
-                errors.password = 'Minimum 6 characters long';
-              return errors;
-            }}
-            onSubmit={({email, password}, {setSubmitting}) => {
-              props.loginUser(email, password, props.navigation);
-              setSubmitting(false);
-            }}>
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              touched,
-              errors,
-            }) => (
-              <>
-                <InputWithIcon
-                  onChangeText={handleChange('email')}
-                  onBlur={handleBlur('email')}
-                  placeholder="Email Address"
-                  icon="user"
-                  value={values.email}
-                  error={errors.email && touched.email && errors.email}
+    <>
+      {props.loading ? (
+        <ActivityIndicator
+          size="large"
+          color="#1363bc"
+          animating={props.loading}
+          // style={styles.loader}
+        />
+      ) : (
+        <View style={styles.aboveView}>
+          <ScrollView>
+            <View style={styles.container}>
+              <TextCustom
+                fontSize={40}
+                textTransform="uppercase"
+                text="Login"
+                marginBottom={20}
+              />
+              <TextCustom
+                fontSize={16}
+                textTransform="uppercase"
+                text="Hey, let's get started"
+                marginBottom={30}
+              />
+              {props.error?.message && (
+                <TextCustom
+                  fontSize={16}
+                  textTransform="uppercase"
+                  text={props.error.message}
+                  marginBottom={5}
+                  color="yellow"
                 />
-                <InputWithIcon
-                  placeholder="Password"
-                  icon="key"
-                  onChangeText={handleChange('password')}
-                  onBlur={handleBlur('password')}
-                  value={values.password}
-                  error={errors.password && touched.password && errors.password}
-                  marginBottom={30}
-                  password
-                />
-                <ButtonWithIcon
-                  onPress={handleSubmit}
-                  text="Continue"
-                  marginBottom={20}
-                />
-              </>
-            )}
-          </Formik>
-          <View>
-            <TextCustom
-              text="New User? Sign up"
-              fontWeight={'500'}
-              cursor
-              onClick={() => props.navigation.navigate('SignUp')}
-            />
-          </View>
+              )}
+              <Formik
+                initialValues={{
+                  email: 'pro123908@gmail.com',
+                  password: 'home123',
+                }}
+                validate={(values) => {
+                  const errors = {};
 
-          {/* <ActivityIndicator
-        size="large"
-        color="#1363bc"
-        animating={props.loading}
-        // style={styles.loader}
-      /> */}
+                  if (!values.email) {
+                    errors.email = 'Email is Required';
+                  } else if (
+                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                      values.email,
+                    )
+                  ) {
+                    errors.email = 'Invalid email address';
+                  }
+
+                  if (!values.password)
+                    errors.password = 'Password is Required';
+                  else if (values.password.length < 6)
+                    errors.password = 'Minimum 6 characters long';
+                  return errors;
+                }}
+                onSubmit={({email, password}, {setSubmitting}) => {
+                  console.log('email & password => ', email, password);
+                  props.loginUser(email, password);
+                  setSubmitting(false);
+                }}>
+                {({
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  values,
+                  touched,
+                  errors,
+                }) => (
+                  <>
+                    <InputWithIcon
+                      onChangeText={handleChange('email')}
+                      onBlur={handleBlur('email')}
+                      placeholder="Email Address"
+                      icon="user"
+                      value={values.email}
+                      error={errors.email && touched.email && errors.email}
+                    />
+                    <InputWithIcon
+                      placeholder="Password"
+                      icon="key"
+                      onChangeText={handleChange('password')}
+                      onBlur={handleBlur('password')}
+                      value={values.password}
+                      error={
+                        errors.password && touched.password && errors.password
+                      }
+                      marginBottom={30}
+                      password
+                    />
+                    <ButtonWithIcon
+                      onPress={handleSubmit}
+                      text="Continue"
+                      marginBottom={20}
+                    />
+                  </>
+                )}
+              </Formik>
+              <View>
+                <TextCustom
+                  text="New User? Sign up"
+                  fontWeight={'500'}
+                  cursor
+                  onClick={() => props.navigation.navigate('SignUp')}
+                />
+              </View>
+            </View>
+          </ScrollView>
         </View>
-      </ScrollView>
-    </View>
+      )}
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import ImagePicker from 'react-native-image-picker';
 
-export const OpenImagePicker = (setImage) => {
+export const OpenImagePicker = (setImage, setCloudData) => {
   const options = {
     title: 'Select Avatar',
     customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
@@ -22,6 +22,10 @@ export const OpenImagePicker = (setImage) => {
     } else {
       source = {uri: response.uri};
       setImage(source);
+      setCloudData({
+        file: 'data:image/jpeg;base64,' + response.data,
+        upload_preset: 'l1v1qrc0',
+      });
     }
   });
 };

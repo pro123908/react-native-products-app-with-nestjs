@@ -10,11 +10,13 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {Formik} from 'formik';
 import {clearRegistrationError, registerUser} from '../actions/AuthActions';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 const SignUpScreen = (props) => {
   const [image, setImage] = useState(null);
   const [imageError, setImageError] = useState('');
   const [imageResponse, setImageResponse] = useState(null);
+  const [cloudData, setCloudData] = useState(null);
 
   useEffect(() => {
     if (props.accessToken) {
@@ -30,7 +32,6 @@ const SignUpScreen = (props) => {
     return unsubscribe;
   }, [props.navigation]);
 
-  console.log('Imag rard = ', imageResponse);
   return (
     <View style={styles.aboveView}>
       <ScrollView>
@@ -92,9 +93,10 @@ const SignUpScreen = (props) => {
                   name,
                   email,
                   password,
-                  image.uri,
+                  cloudData,
                   props.navigation,
                 );
+
                 setSubmitting(false);
               }
             }}>
@@ -139,7 +141,7 @@ const SignUpScreen = (props) => {
                     size={50}
                     marginRight={10}
                     onPress={() => {
-                      OpenImagePicker(setImage);
+                      OpenImagePicker(setImage, setCloudData);
                     }}
                   />
                   {!imageError && !image ? (

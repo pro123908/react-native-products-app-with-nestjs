@@ -15,7 +15,8 @@ const initialState = {
   user: {},
   email: '',
   name: '',
-  loading: '',
+  image: null,
+  loading: false,
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -27,7 +28,7 @@ const AuthReducer = (state = initialState, action) => {
         accessToken: action.payload.accessToken,
         email: action.payload.email,
         name: action.payload.name,
-        loading: false,
+        image: action.payload.image,
       };
 
     case CHECK_PROTECTED:

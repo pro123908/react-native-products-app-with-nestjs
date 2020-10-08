@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {ipAddress} from '../config';
 import {handleInAndOutFromLocalStorage} from '../utils/LocalStorage';
 
 import {
@@ -14,9 +15,7 @@ import {
 export const getProduct = (productId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `http://192.168.18.226:3000/products/${productId}`,
-      );
+      const response = await axios.get(`${ipAddress}/products/${productId}`);
 
       console.log(response.data);
 
@@ -32,7 +31,7 @@ export const getProducts = () => {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
-      const response = await axios.get('http://192.168.43.43:3000/products');
+      const response = await axios.get(`${ipAddress}/products`);
       console.log('Inside');
       console.log('Data came?', response.data);
 
@@ -49,19 +48,17 @@ export const getProducts = () => {
   };
 };
 
-export const addProduct = (title, description, price) => {
+export const addProduct = (email, title, description, price) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     setTimeout(async () => {
       try {
-        const response = await axios.post(
-          'http://192.168.0.200:3000/products',
-          {
-            title,
-            description,
-            price,
-          },
-        );
+        const response = await axios.post(`${ipAddress}/products`, {
+          email,
+          title,
+          description,
+          price,
+        });
 
         console.log(response.data);
 
@@ -80,7 +77,7 @@ export const deleteProduct = (productId) => {
     setTimeout(async () => {
       try {
         const response = await axios.delete(
-          `http://192.168.18.226:3000/products/${productId}`,
+          `${ipAddress}/products/${productId}`,
         );
 
         console.log(response.data);
@@ -98,7 +95,7 @@ export const updateProduct = (productId, fieldsToBeUpdated) => {
   return async (dispatch) => {
     try {
       const response = await axios.patch(
-        `http://192.168.18.226:3000/products/${productId}`,
+        `${ipAddress}/products/${productId}`,
         fieldsToBeUpdated,
       );
 

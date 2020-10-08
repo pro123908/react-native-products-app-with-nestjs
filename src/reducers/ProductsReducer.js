@@ -11,7 +11,7 @@ const initialState = {
   product: {},
   products: [],
   error: {},
-  loading: false,
+  loading: true,
 };
 
 export const ProductsReducer = (state = initialState, action) => {
