@@ -45,21 +45,27 @@ const HomeScreen = (props) => {
   const getHeader = () => {
     return (
       <View style={styles.container}>
-        <TextCustom
-          text={`Welcome ${props.name}`}
-          // color="#000"
-          fontSize={30}
-          textAlign="center"
-          marginBottom={-10}
+        <Image
+          source={{uri: props.image}}
+          style={{height: 100, width: 100, marginRight: 10}}
         />
-        <TextCustom
-          text="Your NewsFeed"
-          // color="#000"
-          fontSize={25}
-          textAlign="center"
-          marginBottom={20}
-          fontWeight="500"
-        />
+        <View style={{paddingRight: 10}}>
+          <TextCustom
+            text={`${props.name}`}
+            // color="#000"
+            fontSize={30}
+            // textAlign="center"
+            marginBottom={-5}
+          />
+          <TextCustom
+            text={props.email}
+            // color="#000"
+            fontSize={14}
+            // textAlign="center"
+
+            fontWeight="500"
+          />
+        </View>
       </View>
     );
   };
@@ -116,6 +122,10 @@ const HomeScreen = (props) => {
             )}
             ListHeaderComponent={getHeader}
             ListFooterComponent={props.products.length > 0 && getFooter()}
+            // onEndReachedThreshold={1} // so when you are at 5 pixel from the bottom react run onEndReached function
+            // onEndReached={() => {
+            //   alert('On end');
+            // }}
           />
           <RoundButtonWithIcon
             text="Add"
@@ -147,14 +157,17 @@ const HomeScreen = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#1363bc',
 
     paddingHorizontal: 10,
-    paddingVertical: 30,
-    alignItems: 'center',
+    // paddingVertical: 30,
+    minHeight: 150,
+
+    paddingVertical: 10,
     paddingBottom: 0,
     marginBottom: 30,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
   },
 
   screenTitle: {

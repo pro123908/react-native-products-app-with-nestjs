@@ -30,9 +30,14 @@ export const loginUser = (userEmail, password) => {
       //   response.data.accessToken
       // );
 
-      const {accessToken, email, name, products} = response.data;
-      handleInAndOutFromLocalStorage('xord-user', {accessToken, email, name});
-      dispatch({type: LOGIN_USER, payload: {accessToken, email, name}});
+      const {accessToken, email, name, products, image} = response.data;
+      handleInAndOutFromLocalStorage('xord-user', {
+        accessToken,
+        email,
+        name,
+        image,
+      });
+      dispatch({type: LOGIN_USER, payload: {accessToken, email, name, image}});
       dispatch({type: GET_PRODUCTS, payload: products});
       // navigation.navigate('Home');
     } catch (error) {
