@@ -17,7 +17,7 @@ import {
 export const loginUser = (userEmail, password) => {
   return async (dispatch) => {
     setLoading(true);
-
+    console.log('Inside loginUser');
     try {
       const response = await axios.post(`${ipAddress}/users/login`, {
         email: userEmail,
